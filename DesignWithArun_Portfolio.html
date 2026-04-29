@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DesignWithArun - Professional Poster Design</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:#080808;color:#f0f0f0;font-family:'Segoe UI',system-ui,sans-serif;overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,8,8,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,34,68,0.18);padding:0 5%;}
+  .nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:62px;}
+  .logo{font-size:20px;font-weight:900;color:#ff2244;letter-spacing:-0.5px;}
+  .nav-links{display:flex;gap:30px;}
+  .nav-links a{text-decoration:none;color:#777;font-size:14px;transition:color 0.2s;font-weight:500;}
+  .nav-links a:hover{color:#ff2244;}
+  .nav-cta{background:#ff2244;color:#fff !important;padding:9px 20px;border-radius:8px;font-weight:700 !important;}
+  .nav-cta:hover{background:#ff3355 !important;color:#fff !important;}
+
+  /* HERO */
+  #hero{min-height:100vh;display:flex;align-items:center;padding:100px 5% 80px;position:relative;overflow:hidden;}
+  .hero-glow{position:absolute;top:0;right:0;width:600px;height:600px;background:radial-gradient(ellipse at top right,rgba(255,34,68,0.07) 0%,transparent 65%);pointer-events:none;}
+  .hero-glow2{position:absolute;bottom:0;left:0;width:400px;height:400px;background:radial-gradient(ellipse at bottom left,rgba(255,34,68,0.04) 0%,transparent 65%);pointer-events:none;}
+  .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;width:100%;}
+  .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,34,68,0.1);color:#ff6677;border:1px solid rgba(255,34,68,0.28);border-radius:20px;padding:5px 15px;font-size:12px;font-weight:700;margin-bottom:22px;letter-spacing:0.5px;}
+  .hero-h1{font-size:clamp(38px,5.5vw,72px);font-weight:900;line-height:1.05;margin-bottom:18px;letter-spacing:-2px;}
+  .hero-h1 span{color:#ff2244;}
+  .hero-sub{font-size:18px;color:#888;margin-bottom:36px;line-height:1.7;}
+  .hero-sub strong{color:#f0f0f0;}
+  .hero-btns{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn-primary{display:inline-flex;align-items:center;gap:8px;background:#ff2244;color:#fff;padding:15px 30px;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.25s;border:none;}
+  .btn-primary:hover{background:#ff3355;transform:translateY(-2px);box-shadow:0 10px 30px rgba(255,34,68,0.3);}
+  .btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#ddd;padding:15px 30px;border-radius:9px;font-size:15px;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.25s;border:1px solid rgba(255,255,255,0.14);}
+  .btn-outline:hover{border-color:#ff2244;color:#ff2244;}
+  .hero-stats{display:flex;gap:40px;margin-top:48px;flex-wrap:wrap;}
+  .stat-num{font-size:34px;font-weight:900;color:#ff2244;line-height:1;}
+  .stat-lbl{font-size:12px;color:#555;margin-top:4px;font-weight:500;}
+
+  /* POSTER STACK */
+  .hero-right{position:relative;height:480px;perspective:1000px;}
+  .poster-stack{position:relative;width:100%;height:100%;}
+  .ps-card{position:absolute;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,0.7);}
+  .ps-card img{width:100%;height:100%;object-fit:cover;display:block;}
+  .ps-main{width:220px;height:370px;top:50%;left:50%;transform:translate(-50%,-50%) rotateY(-6deg) rotateX(3deg);z-index:4;border:2px solid rgba(255,34,68,0.5);}
+  .ps-left{width:165px;height:280px;top:50%;left:6%;transform:translateY(-50%) rotateY(10deg) scale(0.88);z-index:3;filter:brightness(0.6);opacity:0.85;}
+  .ps-right{width:165px;height:280px;top:50%;right:4%;transform:translateY(-50%) rotateY(-10deg) scale(0.88);z-index:3;filter:brightness(0.6);opacity:0.85;}
+  .ps-back{width:145px;height:240px;top:54%;left:50%;transform:translate(-50%,-50%) scale(0.78);z-index:2;filter:brightness(0.35);opacity:0.6;}
+  .glow-dot{position:absolute;width:7px;height:7px;background:#ff2244;border-radius:50%;box-shadow:0 0 14px 5px rgba(255,34,68,0.5);animation:pdot 2s infinite;}
+  .gd1{top:18%;left:18%;}
+  .gd2{bottom:22%;right:20%;animation-delay:0.7s;}
+  .gd3{top:60%;left:12%;animation-delay:1.2s;}
+  @keyframes pdot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.3;transform:scale(0.5);}}
+
+  /* SECTIONS */
+  section{padding:90px 5%;}
+  .section-inner{max-width:1200px;margin:0 auto;}
+  .sec-tag{display:inline-block;background:rgba(255,34,68,0.1);color:#ff6677;border:1px solid rgba(255,34,68,0.25);border-radius:4px;padding:4px 12px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+  .sec-h2{font-size:clamp(28px,4vw,50px);font-weight:900;margin-bottom:12px;letter-spacing:-1px;color:#fff;}
+  .redline{width:40px;height:3px;background:#ff2244;border-radius:2px;margin:14px 0 24px;}
+  .sec-sub{font-size:15px;color:#666;max-width:500px;line-height:1.6;}
+
+  /* PORTFOLIO */
+  #portfolio{background:#0a0a0a;}
+  .niche-tabs{display:flex;gap:8px;margin:32px 0 28px;flex-wrap:wrap;}
+  .ntab{background:transparent;border:1px solid rgba(255,255,255,0.1);color:#777;padding:7px 16px;border-radius:6px;font-size:13px;cursor:pointer;transition:all 0.2s;font-family:inherit;font-weight:500;}
+  .ntab.on,.ntab:hover{border-color:#ff2244;color:#ff2244;background:rgba(255,34,68,0.08);}
+  .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:14px;}
+  .pcard{border-radius:12px;overflow:hidden;position:relative;cursor:pointer;border:1px solid rgba(255,255,255,0.06);transition:all 0.3s;background:#0f0f0f;}
+  .pcard:hover{transform:translateY(-7px) scale(1.02);border-color:rgba(255,34,68,0.4);box-shadow:0 18px 45px rgba(0,0,0,0.55),0 0 0 1px rgba(255,34,68,0.15);}
+  .pcard img{width:100%;aspect-ratio:9/16;object-fit:cover;display:block;transition:transform 0.35s;}
+  .pcard:hover img{transform:scale(1.06);}
+  .pcard-lbl{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,transparent 55%);opacity:0;transition:opacity 0.3s;display:flex;align-items:flex-end;padding:14px;}
+  .pcard:hover .pcard-lbl{opacity:1;}
+  .pniche{font-size:10px;color:#ff6677;display:block;margin-bottom:3px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;}
+  .plbl-text{font-size:12px;font-weight:700;color:#fff;}
+
+  /* PRICING */
+  #pricing{background:#080808;}
+  .pricegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px;}
+  .prcard{background:#111;border:1px solid rgba(255,255,255,0.07);border-radius:18px;padding:32px 26px;position:relative;transition:all 0.3s;overflow:hidden;}
+  .prcard::after{content:'';position:absolute;inset:0;border-radius:18px;border:1px solid transparent;transition:border-color 0.3s;pointer-events:none;}
+  .prcard:hover{transform:translateY(-9px);}
+  .prcard:hover::after{border-color:rgba(255,34,68,0.4);}
+  .prcard.feat{background:#130a0a;border-color:rgba(255,34,68,0.35);box-shadow:0 0 40px rgba(255,34,68,0.06);}
+  .prcard.feat::after{border-color:rgba(255,34,68,0.5);}
+  .hot-badge{background:#ff2244;color:#fff;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;position:absolute;top:20px;right:20px;letter-spacing:0.5px;}
+  .pr-plan{font-size:11px;color:#ff6677;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;}
+  .pr-amt{font-size:46px;font-weight:900;color:#fff;letter-spacing:-2px;margin-bottom:6px;line-height:1;}
+  .pr-amt span{font-size:16px;font-weight:400;color:#555;}
+  .pr-desc{font-size:13px;color:#555;margin-bottom:22px;line-height:1.5;}
+  .pr-feats{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+  .pr-feats li{font-size:13px;color:#aaa;display:flex;align-items:center;gap:9px;}
+  .pr-feats li::before{content:'';width:6px;height:6px;background:#ff2244;border-radius:50%;flex-shrink:0;}
+  .pr-btn{display:block;text-align:center;background:transparent;border:1px solid rgba(255,255,255,0.12);color:#bbb;padding:12px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;text-decoration:none;font-family:inherit;}
+  .pr-btn:hover{background:#ff2244;border-color:#ff2244;color:#fff;}
+  .prcard.feat .pr-btn{background:#ff2244;border-color:#ff2244;color:#fff;}
+  .prcard.feat .pr-btn:hover{background:#ff3355;}
+
+  /* ORDER */
+  #order{background:#0a0a0a;}
+  .ordergrid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;}
+  .obox{background:#111;border:1px solid rgba(255,34,68,0.2);border-radius:18px;padding:40px 32px;text-align:center;}
+  .obox-icon{font-size:52px;margin-bottom:14px;display:block;}
+  .obox-h{font-size:22px;font-weight:800;color:#fff;margin-bottom:12px;}
+  .obox-sub{font-size:14px;color:#666;line-height:1.7;margin-bottom:28px;}
+  .wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 36px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;text-decoration:none;transition:all 0.3s;border:none;font-family:inherit;}
+  .wa-btn:hover{background:#1ebe5d;transform:translateY(-3px);box-shadow:0 12px 30px rgba(37,211,102,0.28);}
+  .wa-note{font-size:11px;color:#444;margin-top:14px;}
+  .formbox{background:#111;border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:36px 32px;}
+  .form-title{font-size:20px;font-weight:800;color:#fff;margin-bottom:24px;}
+  .fgrp{margin-bottom:16px;}
+  .flbl{display:block;font-size:11px;color:#555;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;margin-bottom:7px;}
+  .finput,.fsel,.fta{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:8px;padding:11px 14px;color:#f0f0f0;font-size:14px;outline:none;font-family:inherit;transition:border-color 0.2s;box-sizing:border-box;}
+  .finput:focus,.fsel:focus,.fta:focus{border-color:#ff2244;}
+  .fsel{background:#111;cursor:pointer;}
+  .fsel option{background:#111;}
+  .fta{resize:vertical;min-height:90px;}
+  .fsub{width:100%;background:#ff2244;color:#fff;border:none;padding:14px;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:all 0.25s;margin-top:6px;}
+  .fsub:hover{background:#ff3355;box-shadow:0 8px 24px rgba(255,34,68,0.3);}
+
+  /* FOOTER */
+  footer{background:#050505;border-top:1px solid rgba(255,34,68,0.12);padding:48px 5%;text-align:center;}
+  .footer-inner{max-width:1200px;margin:0 auto;}
+  .footer-logo{font-size:26px;font-weight:900;color:#ff2244;margin-bottom:8px;}
+  .footer-txt{font-size:13px;color:#444;line-height:1.8;}
+  .footer-num{font-size:14px;color:#666;margin-top:10px;font-weight:500;}
+
+  /* FADE IN */
+  .fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease;}
+  .fade-up.vis{opacity:1;transform:translateY(0);}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-right{display:none;}
+    .pricegrid{grid-template-columns:1fr;}
+    .ordergrid{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+  @media(max-width:600px){
+    .hero-h1{font-size:36px;}
+    .pgrid{grid-template-columns:repeat(2,1fr);}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">DesignWithArun</div>
+    <div class="nav-links">
+      <a href="#portfolio">Portfolio</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#order">Order</a>
+      <a href="https://wa.me/919867335807?text=Hi%20Arun!" target="_blank" class="nav-cta">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-inner">
+    <div class="fade-up">
+      <div class="hero-badge">⚡ Professional Graphic Design</div>
+      <h1 class="hero-h1">Want more<br><span>customers? 😈</span></h1>
+      <p class="hero-sub">Professional posters starting at <strong>₹99 💸</strong><br>Eye-catching designs that convert scrollers into buyers.</p>
+      <div class="hero-btns">
+        <a href="#order" class="btn-primary">Order Now 🔥</a>
+        <a href="#portfolio" class="btn-outline">View My Work</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">500+</div><div class="stat-lbl">Posters Delivered</div></div>
+        <div><div class="stat-num">200+</div><div class="stat-lbl">Happy Clients</div></div>
+        <div><div class="stat-num">₹99</div><div class="stat-lbl">Starting Price</div></div>
+        <div><div class="stat-num">24hr</div><div class="stat-lbl">Fast Delivery</div></div>
+      </div>
+    </div>
+    <div class="hero-right fade-up" id="tiltWrap">
+      <div class="poster-stack">
+        <div class="ps-card ps-back">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80" alt="poster">
+        </div>
+        <div class="ps-card ps-left">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80" alt="poster">
+        </div>
+        <div class="ps-card ps-right">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" alt="poster">
+        </div>
+        <div class="ps-card ps-main" id="mainCard">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=90" alt="main poster">
+        </div>
+        <div class="glow-dot gd1"></div>
+        <div class="glow-dot gd2"></div>
+        <div class="glow-dot gd3"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="section-inner">
+    <div class="fade-up">
+      <span class="sec-tag">Portfolio</span>
+      <h2 class="sec-h2">Designs That Hit Hard</h2>
+      <div class="redline"></div>
+      <p class="sec-sub">Real posters made by Arun — for real businesses that want to stand out.</p>
+    </div>
+    <div class="niche-tabs fade-up">
+      <button class="ntab on" onclick="filterP('all',this)">All Work</button>
+      <button class="ntab" onclick="filterP('brand',this)">💼 Brand</button>
+      <button class="ntab" onclick="filterP('food',this)">🍔 Food</button>
+      <button class="ntab" onclick="filterP('gym',this)">💪 Gym</button>
+      <button class="ntab" onclick="filterP('freelance',this)">🖥️ Freelance</button>
+      <button class="ntab" onclick="filterP('product',this)">👟 Product</button>
+      <button class="ntab" onclick="filterP('content',this)">🎬 Content</button>
+    </div>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner">
+    <div class="fade-up">
+      <span class="sec-tag">Pricing</span>
+      <h2 class="sec-h2">Simple. Transparent.</h2>
+      <div class="redline"></div>
+      <p class="sec-sub">No hidden charges. Pick a plan and get your poster delivered fast.</p>
+    </div>
+    <div class="pricegrid fade-up">
+      <div class="prcard">
+        <div class="pr-plan">Basic</div>
+        <div class="pr-amt">₹99 <span>/ poster</span></div>
+        <div class="pr-desc">Perfect for small businesses & startups</div>
+        <ul class="pr-feats">
+          <li>1 Social Media Poster</li>
+          <li>2 Revision Rounds</li>
+          <li>HD Quality Export</li>
+          <li>Delivery in 24 Hours</li>
+          <li>WhatsApp Support</li>
+        </ul>
+        <a href="#order" class="pr-btn">Order Basic</a>
+      </div>
+      <div class="prcard feat">
+        <span class="hot-badge">🔥 POPULAR</span>
+        <div class="pr-plan">Pro</div>
+        <div class="pr-amt">₹199 <span>/ poster</span></div>
+        <div class="pr-desc">Best value for growing brands</div>
+        <ul class="pr-feats">
+          <li>3 Social Media Posters</li>
+          <li>Unlimited Revisions</li>
+          <li>HD + Print Quality</li>
+          <li>Delivery in 12 Hours</li>
+          <li>Source File Included</li>
+          <li>Priority WhatsApp Support</li>
+        </ul>
+        <a href="#order" class="pr-btn">Order Pro</a>
+      </div>
+      <div class="prcard">
+        <div class="pr-plan">Premium</div>
+        <div class="pr-amt">₹299 <span>/ poster</span></div>
+        <div class="pr-desc">Full branding package for serious businesses</div>
+        <ul class="pr-feats">
+          <li>5 Posters + Story Versions</li>
+          <li>Unlimited Revisions</li>
+          <li>HD + Print + Web Formats</li>
+          <li>Same Day Delivery</li>
+          <li>All Source Files</li>
+          <li>1 Month Free Edits</li>
+          <li>Dedicated Manager</li>
+        </ul>
+        <a href="#order" class="pr-btn">Order Premium</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER -->
+<section id="order">
+  <div class="section-inner">
+    <div class="fade-up">
+      <span class="sec-tag">Order Now</span>
+      <h2 class="sec-h2">Ready to Level Up? 🚀</h2>
+      <div class="redline"></div>
+    </div>
+    <div class="ordergrid fade-up">
+      <div class="obox">
+        <span class="obox-icon">📩</span>
+        <div class="obox-h">Order on WhatsApp</div>
+        <p class="obox-sub">Fastest way to get your poster! Drop a message with your business name & requirements — Arun will handle the rest.</p>
+        <a class="wa-btn" href="https://wa.me/919867335807?text=Hi%20Arun!%20I%20want%20to%20order%20a%20poster%20for%20my%20business." target="_blank">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Order on WhatsApp 📩
+        </a>
+        <p class="wa-note">+91 98673 35807 &bull; Avg reply in 10 min &bull; 7 days a week</p>
+      </div>
+      <div class="formbox">
+        <div class="form-title">Send an Enquiry</div>
+        <div class="fgrp">
+          <label class="flbl">Your Name</label>
+          <input class="finput" type="text" placeholder="e.g. Rahul Sharma" id="fname">
+        </div>
+        <div class="fgrp">
+          <label class="flbl">Business Type</label>
+          <select class="fsel" id="fbiz">
+            <option value="">Select your niche...</option>
+            <option>Gym / Fitness</option>
+            <option>Salon / Beauty</option>
+            <option>Cafe / Restaurant</option>
+            <option>Clothing / Fashion</option>
+            <option>Tech / Freelance</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="fgrp">
+          <label class="flbl">Poster Requirements</label>
+          <textarea class="fta" placeholder="Tell me about your poster — offer, colors, text, size, etc." id="fdetails"></textarea>
+        </div>
+        <button class="fsub" onclick="submitEnq()">Send Enquiry →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">DesignWithArun</div>
+    <p class="footer-txt">Professional graphic design services &bull; Posters starting at ₹99 &bull; Fast delivery guaranteed</p>
+    <p class="footer-num">📞 +91 98673 35807</p>
+    <p class="footer-txt" style="margin-top:14px;font-size:11px;">© 2025 DesignWithArun &bull; All Rights Reserved</p>
+  </div>
+</footer>
+
+<script>
+// Portfolio data — using your actual poster images
+const items =[
+  {img:'https://i.ibb.co/n8jnCS44/Whisk-153d1b9fcca09fb88c54ba57bd8f71aadr.jpg'},
+  {img:'https://i.ibb.co/gbVBpjgQ/Whisk-311846590b1f12faa0244d1dbf49fb08dr.jpg'},
+  {img:'https://i.ibb.co/jZ9Nw2ZK/Whisk-a5ce911cd64bf5588d84d080dce18b1ddr.jpg'},
+  {img:'https://i.ibb.co/679M8zxC/Whisk-c8a699a2b551a23be3c4d7c4eec6ba59dr.jpg'},
+  {img:'https://i.ibb.co/3yfCm6cD/Whisk-c499dd8bc59a5d2b9b14a49cb1d3194bdr.jpg'},
+  {img:'https://i.ibb.co/1GCbX4rV/Whisk-d5bf055312659ce98af48e876bd603ebdr.jpg'},
+  {img:'https://i.ibb.co/fYrd3vBh/Whisk-db8e49f463d2396bb6341df190e98df4dr.jpg'},
+  {img:'https://i.ibb.co/Dfh32LJn/Whisk-imyhj2n5qgoiftmy0cz3yjytuzmyqtlmrwoh1cz.jpg'},
+  {img:'https://i.ibb.co/BV6fCcYg/Whisk-izyjrgomzty2umny0cmmdtotmgo1qtlwmdz20cz.jpg'},
+  {img:'https://i.ibb.co/twKPtbjg/Whisk-lrmmlfzm1czm1mtytqtm3ktlygdm00yy3ujntcj.png'},
+  {img:'https://i.ibb.co/TGyD1tS/Whisk-mgmxatz4mgm2qwnm1sn5mmytktzlrtlmrty10cn-Copy.jpg'}
+];
+
+// NOTE FOR ARUN: Replace the img URLs above with your actual poster image paths
+// e.g. img:'./posters/poster1.jpg'  — put your images in a folder next to this HTML file
+
+function renderP(f){
+  const g = document.getElementById('pgrid');
+  const data = f === 'all' ? items : items.filter(x => x.niche === f);
+  g.innerHTML = data.map((p,i) => `
+    <div class="pcard" style="animation:fadeIn 0.4s ease ${i*0.05}s both">
+      <img src="${p.img}" alt="${p.lbl}" loading="lazy">
+      <div class="pcard-lbl">
+        <div>
+          <span class="pniche">${p.niche}</span>
+          <div class="plbl-text">${p.lbl}</div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterP(f, btn){
+  document.querySelectorAll('.ntab').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderP(f);
+}
+
+// 3D tilt on hero poster
+const tw = document.getElementById('tiltWrap');
+const mc = document.getElementById('mainCard');
+if(tw && mc){
+  tw.addEventListener('mousemove', e => {
+    const r = tw.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width - 0.5) * 22;
+    const y = ((e.clientY - r.top) / r.height - 0.5) * -16;
+    mc.style.transform = `translate(-50%,-50%) rotateY(${-6+x*0.5}deg) rotateX(${3+y*0.4}deg)`;
+    mc.style.transition = 'transform 0.1s linear';
+  });
+  tw.addEventListener('mouseleave', () => {
+    mc.style.transform = 'translate(-50%,-50%) rotateY(-6deg) rotateX(3deg)';
+    mc.style.transition = 'transform 0.6s ease';
+  });
+}
+
+// Scroll fade-in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); });
+}, {threshold: 0.12});
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Form submit → WhatsApp
+function submitEnq(){
+  const n = document.getElementById('fname').value.trim();
+  const b = document.getElementById('fbiz').value;
+  const d = document.getElementById('fdetails').value.trim();
+  if(!n){ alert('Please enter your name!'); return; }
+  const msg = encodeURIComponent(`Hi Arun! My name is ${n}. Business: ${b||'Not specified'}. Requirements: ${d||'Will discuss'}`);
+  window.open(`https://wa.me/919867335807?text=${msg}`, '_blank');
+}
+
+// Card fade animation
+const style = document.createElement('style');
+style.textContent = '@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}';
+document.head.appendChild(style);
+
+renderP('all');
+</script>
+</body>
+</html>
